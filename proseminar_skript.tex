@@ -1,0 +1,35 @@
+\documentclass[11pt]{scrartcl}
+
+\usepackage{proseminar}
+
+\subject{Proseminar}
+\title{
+    Tbd
+}
+\subtitle{TU Bergakademie Freiberg}
+\author{Niklas Birk}
+\date{16.06.2023 - SS23}
+
+\addbibresource{proseminar.bib}
+\nocite{*}
+
+\makeindex
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+
+    \printbibliography
+
+    \newpage
+
+    \section{Lineare Differentialgleichungssysteme mit konstanten Koeffizienten}\label{sec:01}
+    \input{sections/01_ldgls}
+
+    \section{Existenz und Eindeutigkeit}\label{sec:02}
+    \input{sections/02_existenz_eindeutigkeit}
+
+    \section{Anwendung auf homogene lineare DGLS}\label{sec:03}
+    \input{sections/03_anwendung_auf_jnf}
+
+\end{document}
