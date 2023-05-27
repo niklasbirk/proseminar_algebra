@@ -17,16 +17,16 @@ Für ein~\ref{eq:dgls} liegen dann die $n$ unabhängigen Differentialgleichungen
 \end{equation*}
 vor, deren Lösungen zu einem gegebenen Anfangswert $\vec{y}_0 = (y_{0_1},\dots,y_{0_n})^T$ durch
 \begin{equation*}
-    y_i(x) = \e^{a_i x} y_{0_i} \qquad (i = 1,\dots,n)
+    y_i(x) = \e^{(x - x_0) a_i} y_{0_i} \qquad (i = 1,\dots,n)
 \end{equation*}
 gegeben sind.
 Mittels Matrixexponentialfunktion lässt sich die Lösung also durch
 \begin{equation*}
-    \vec{y}(x) = \e^{Ax}
+    \vec{y}(x) = \e^{(x - x_0) A}
     = \begin{pmatrix}
-        \e^{a_1 x} &        & \\
+        \e^{(x - x_0) a_1} &        & \\
                    & \ddots & \\
-                   &        & \e^{a_n x}
+                   &        & \e^{(x - x_0) a_n}
     \end{pmatrix}
 \end{equation*}
 angeben.
@@ -34,12 +34,12 @@ angeben.
 \subsection{Diagonalisierbare Matrizen}\label{subsec:03-02}
 Das Lösen eines~\ref{eq:dgls} mit einer diagonalisierbaren Koeffizientenmatrix $A$ kann auf den obigen Fall der~\nameref{subsec:03-01}
 zurückgeführt werden.
-Dazu stellen wir $A$ mit einer Diagonalmatrix $L = \diag\{\lambda_1,\dots,\lambda_n\}$ aus den Eigenwerten $\lambda_i$ ($i = 1,\dots,n$)
-und $V$ die Matrix der zugehörigen Eigenvektoren von $A$ durch
+Dazu wird $A$ durch eine Diagonalmatrix $L = \diag\{\lambda_1,\dots,\lambda_n\}$ aus den Eigenwerten $\lambda_i$ ($i = 1,\dots,n$)
+und durch die Matrix $V$ der zugehörigen Eigenvektoren mit
 \begin{equation*}
     A = V L V^{-1}
 \end{equation*}
-dar.
+dargestellt.
 
 \begin{theorem}\label{thm:diagbar-cp-solution}
     Sei $A = V L V^{-1}$ eine diagonalisierbare Matrix mit $L = \diag\{\lambda_1,\dots,\lambda_n\}$,
@@ -50,8 +50,8 @@ dar.
         \intertext{durch}
         \begin{aligned}
             \vec{y}(x)
-            &= V \e^{L x} V^{-1} \vec{y}_0\\
-            \big( &= \left. V \diag\left\{\e^{\lambda_1 x}, \dots,\e^{\lambda_n x}\right\} V^{-1} \right)
+            &= V \e^{(x - x_0) L} V^{-1} \vec{y}_0\\
+            \big( &= \left. V \diag\left\{\e^{(x - x_0) \lambda_1}, \dots,\e^{(x - x_0) \lambda_n}\right\} V^{-1} \right)
         \end{aligned}
     \end{gather*}
     gegeben.
@@ -71,15 +71,15 @@ dar.
     \end{equation}
     Da $L$ eine Diagonalmatrix ist, folgt mit~\autoref{subsec:03-01}, dass
     \begin{equation*}
-        \vec{u}(x) = \e^{L x} \vec{u}_0
+        \vec{u}(x) = \e^{(x - x_0) L} \vec{u}_0
     \end{equation*}
     die Lösung von~\eqref{eq:03-02-01} ist.
     Rücksubstitution ergibt schließlich die Lösung
-    \begin{equation*}
-        \vec{u}(x) = \e^{L x} \vec{u}_0
-        \qquad\Leftrightarrow\qquad V^{-1} \vec{y} = \e^{L x} V^{-1} \vec{y}_0
-        \qquad\Leftrightarrow\qquad \vec{y} = V \e^{L x} V^{-1} \vec{y}_0.
-    \end{equation*}
+    \begin{alignat*}{2}
+                             && \vec{u}(x) &= \e^{(x - x_0) L} \vec{u}_0\\
+        \Leftrightarrow\quad && V^{-1} \vec{y} &= \e^{(x - x_0) L} V^{-1} \vec{y}_0\\
+        \Leftrightarrow\quad && \vec{y} &= V \e^{(x - x_0) L} V^{-1} \vec{y}_0.
+    \end{alignat*}
 \end{proof}
 
 \begin{corollary}
@@ -105,7 +105,7 @@ dar.
     \end{alignat*}
 \end{proof}
 
-\hyperref[thm:diagbar-cp-solution]{Folgerung~\ref*{thm:diagbar-cp-solution}} lässt sich leicht ersichtlich auf einen allgemeinen Fall von ähnlichen Matrizen $A = S B S^{-1}$ übertragen, d.h.
+\emph{Bemerkung:} \hyperref[thm:diagbar-cp-solution]{Folgerung~\ref*{thm:diagbar-cp-solution}} lässt sich leicht ersichtlich auf einen allgemeinen Fall von ähnlichen Matrizen $A = S B S^{-1}$ übertragen, d.h.
 \begin{equation*}
     \e^A = \e^{S B S^{-1}} = S \e^B S^{-1}.
 \end{equation*}
@@ -155,9 +155,9 @@ dass die gewonnenen Erkenntnisse aus~\autoref{subsec:03-02} anwendbar sein könn
     Es gilt
     \begin{equation*}
         A^k = \begin{pmatrix}
-                  A^k_1   &        & \\
-                          & \ddots & \\
-                          &        & A^k_n
+                  A^k_1 &        & \\
+                        & \ddots & \\
+                        &        & A^k_n
         \end{pmatrix}.
     \end{equation*}
     Damit folgt dann
@@ -191,22 +191,22 @@ dass die gewonnenen Erkenntnisse aus~\autoref{subsec:03-02} anwendbar sein könn
 
 Es ergeben sich also Lösungen eines gegebenen~\hyperref[eq:cp]{C\textc{auchy}-Problems} mit einer nicht-diagonalisierbaren Matrix $A = V J V^{-1}$ durch
 \begin{equation*}
-    \vec{y}(x) = V \e^{J x} V^{-1} \vec{y}_0.
+    \vec{y}(x) = V \e^{(x - x_0) J} V^{-1} \vec{y}_0.
 \end{equation*}
 Zudem zeigt~\hyperref[thm:blockdiag-exp]{Lemma~\ref*{thm:blockdiag-exp}},
 dass sich die Berechnung von $\e^J$ auf die einzelnen $\e^{J_i}$ für $i = 1,\dots,n$ reduzieren lässt.\\
 Ein J\textc{ordan}-Kästchen $J_i$ lässt sich weiter zerlegen zu
 \begin{equation*}
     J_i = \begin{pmatrix}
-              \lambda   & 1       &        & \\
-                        & \lambda & \ddots & \\
-                        &         & \ddots & 1 \\
-                        &         &        & \lambda
+              \lambda & 1       &        & \\
+                      & \lambda & \ddots & \\
+                      &         & \ddots & 1 \\
+                      &         &        & \lambda
     \end{pmatrix}
     = \underbrace{\begin{pmatrix}
-        \lambda  &        & \\
-                 & \ddots & \\
-                 &        & \lambda
+        \lambda &        & \\
+                & \ddots & \\
+                &        & \lambda
     \end{pmatrix}}_{= L}
     + \underbrace{\begin{pmatrix}
           0 & 1 &        & \\
@@ -217,16 +217,70 @@ Ein J\textc{ordan}-Kästchen $J_i$ lässt sich weiter zerlegen zu
     = L + N.
 \end{equation*}
 Dabei ist $N$ eine \emph{nilpotente} Matrix, d.h.\ es existiert ein $l \in \NN$ so, dass $N^l = 0$.
-Die Matrizen $L$ und $N$ kommutieren, weshalb
-\begin{equation*}
+Zudem kommutieren die Matrizen $L$ und $N$, da
+\begin{gather*}
+    L N = (\lambda E) N = \lambda (EN) = \lambda (NE) = N (\lambda E) = N L,\\
+    \intertext{weshalb}
     \e^{L + N} = \e^L \e^N
-\end{equation*}
+\end{gather*}
 gilt.
 Da $L$ eine Diagonalmatrix ist, ist die Lösung von $\e^L$ bereits aus~\autoref{subsec:03-01} bekannt.
 Für $N$ als nilpotente Matrix ergibt sich zudem eine endliche Summe bei der Berechnung von $\e^N$,
 da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
-\begin{equation*}
-    \e^N
-    = \sum^\infty_{k=0} \frac{N^k}{k!}
-    = \sum^{l-1}_{k=0} \frac{N^k}{k!}.
-\end{equation*}
+\begin{align*}
+    \e^N &= \sum^\infty_{k=0} \frac{N^k}{k!}
+        = \sum^{l-1}_{k=0} \frac{N^k}{k!}
+        = E + N + \frac{1}{2} N^2 + \dots + \frac{1}{(l-1)!} N^{l-1}\\
+    &= E + N +  \frac{1}{2} \begin{pmatrix}
+                                0 & 0      & 1      &        & \\
+                                  & \ddots & \ddots & \ddots & \\
+                                  &        & \ddots & \ddots & 1\\
+                                  &        &        & \ddots & 0\\
+                                  &        &        &        & 0
+                            \end{pmatrix}
+        + \dots + \frac{1}{(l-1)!}  \begin{pmatrix}
+                                        0 &        & 1\\
+                                          & \ddots & \\
+                                          &        & 0
+                                    \end{pmatrix}\\
+    &= \begin{pmatrix}
+           1 & 1 & \frac{1}{2} & \frac{1}{3!} & \dots  & \frac{1}{(l-1)!}\\
+           & 1 & 1             & \frac{1}{2}  & \dots  & \frac{1}{(l-2)!}\\
+           &   & 1             & 1              & \dots  & \vdots\\
+           &   &               & 1              & \ddots & \frac{1}{2}\\
+           &   &               &                & \ddots & 1\\
+           &   &               &                &        & 1
+    \end{pmatrix}.
+\end{align*}
+Werden nun alle Erkenntnisse kombiniert, gilt für $\e^{J_i t}$ schließlich
+\begin{align*}
+    \e^{J_i t} &= \e^{(L + N) t} = \e^{Lt + Nt} = \e^{Lt} \e^{Nt}\\
+    &= \begin{pmatrix}
+           \e^{\lambda t} &        & \\
+                          & \ddots & \\
+                          &        & \e^{\lambda t}
+        \end{pmatrix}
+        \begin{pmatrix}
+            1 & t & \frac{t^2}{2} & \frac{t^3}{3!} & \dots  & \frac{t^{l-1}}{(l-1)!}\\
+              & 1 & t             & \frac{t^2}{2}  & \dots  & \frac{t^{l-2}}{(l-2)!}\\
+              &   & 1             & x              & \dots  & \vdots\\
+              &   &               & 1              & \ddots & \frac{t^2}{2}\\
+              &   &               &                & \ddots & t\\
+              &   &               &                &        & 1
+        \end{pmatrix}.
+\end{align*}
+Für die Lösung eines~\hyperref[eq:cp]{C\textc{auchy}-Problems} mit einer nicht-diagonalisierbaren Matrix $A = V J V^{-1}$,
+gilt insgesamt also
+\begin{align*}
+    \vec{y}(x) &= V \e^{(x - x_0) J} V^{-1} \vec{y}_0\\
+    &= V \begin{pmatrix}
+            \e^{(x - x_0) J_1} &        & \\
+                               & \ddots & \\
+                               &        & \e^{(x - x_0) J_n}
+        \end{pmatrix} V^{-1} \vec{y}_0\\
+    &= V \begin{pmatrix}
+            \e^{(x - x_0) L_1} \e^{(x - x_0) N} &        & \\
+                                                & \ddots & \\
+                                                &        & \e^{(x - x_0) L_n} \e^{(x - x_0) N}
+        \end{pmatrix} V^{-1} \vec{y}_0.
+\end{align*}
