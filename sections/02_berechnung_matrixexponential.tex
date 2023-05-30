@@ -1,0 +1,299 @@
+Wie in~\hyperref[thm:existenz-eindeutigkeit]{Satz~\ref*{thm:existenz-eindeutigkeit}} festgestellt wurde,
+kann die Lösung eines~\hyperref[eq:cp]{C\textc{auchy}-Problems} mit der Matrixexponentialfunktion berechnet werden.
+In diesem Abschnitt soll nun herausgearbeitet werden, wie sich die Matrixexponentialfunktion selbst berechnen lässt.
+
+\subsection{Diagonale Matrizen}\label{subsec:diagonale-matrizen}
+Zunächst werden diagonale Matrizen
+\begin{equation*}
+    A = \diag\{a_1,\dots,a_n\}
+    = \begin{pmatrix}
+          a_1 &        & \\
+              & \ddots & \\
+              &        & a_3
+    \end{pmatrix}
+\end{equation*}
+betrachtet.
+
+\begin{theorem}\label{thm:matrixexponential-diagonal}
+    Sei eine Diagonalmatrix $A = \diag\{a_1,\dots,a_n\}$.
+    Dann gilt für die Matrixexponentialfunktion
+    \begin{equation*}
+        \e^{t A} = \diag\{\e^{t a_1},\dots,\e^{t a_n}\}.
+    \end{equation*}
+\end{theorem}
+
+\begin{proof}
+    Es gilt
+    \begin{equation*}
+        A^k = \begin{pmatrix}
+                  a^k_1 &        & \\
+                  & \ddots & \\
+                  &        & a^k_n
+        \end{pmatrix}.
+    \end{equation*}
+    Womit für die Matrixexponentialfunktion folgt, dass
+    \begin{alignat*}{2}
+        \e^{t A}
+        &= \sum^\infty_{k=0} \frac{(tA)^k}{k!}
+            &&= \sum^\infty_{k=0} \frac{t^k A^k}{k!}\\
+        &= \sum^\infty_{k=0} \frac{t^k}{k!}
+                \begin{pmatrix}
+                    a^k_1 &        & \\
+                          & \ddots & \\
+                          &        & a^k_n
+                \end{pmatrix}
+            &&= \sum^\infty_{k=0}
+                \begin{pmatrix}
+                    \frac{t^k a^k_1}{k!} &        & \\
+                                         & \ddots & \\
+                                         &        & \frac{t^k a^k_n}{k!}
+                \end{pmatrix}\\
+        &= \begin{pmatrix}
+                    \sum\limits^\infty_{k=0} \frac{(t a_1)^k}{k!} &        & \\
+                                                                 & \ddots & \\
+                                                                 &        & \sum\limits^\infty_{k=0} \frac{(t a_n)^k}{k!}
+                \end{pmatrix}
+            &&= \begin{pmatrix}
+                   \e^{t a_1} &        & \\
+                              & \ddots & \\
+                              &        & \e^{t a_n}
+            \end{pmatrix}
+    \end{alignat*}
+\end{proof}
+
+
+\subsection{Diagonalisierbare Matrizen}\label{subsec:diagonalisierbare-matrizen}
+Das Berechnen einer Matrixexponentialfunktion mit einer diagonalisierbaren Matrix $A$ im Exponenten
+kann auf den obigen Fall der~\hyperref[subsec:diagonale-matrizen]{diagonalen Matrizen} zurückgeführt werden.
+
+\begin{definition}[Wiederholung]
+    Eine Matrix $A$ heißt \emph{diagonalisierbar}, falls eine Diagonalmatrix $D$ und eine reguläre Matrix $A$ so existieren, dass
+    \begin{equation*}
+        A = S D S^{-1}
+    \end{equation*}
+    gilt.
+\end{definition}
+
+\begin{lemma}\label{thm:matrixexponential-diagonalisierbar}
+    Sei $A$ ähnlich zu $B$ mit $A = S B S^{-1}$.
+    Dann gilt für die Matrixexponentialfunktion
+    \begin{equation*}
+        \e^{t A} = S \e^{t B} S^{-1}.
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Zuerst wird gezeigt, dass $A^k = S B^k S^{-1}$ für $k \in \NN$:
+    \begin{alignat*}{2}
+        A^k &= (S B S^{-1})^k &&= \underbrace{(S B S^{-1}) (S B S^{-1}) (S B S^{-1}) \dots (S B S^{-1})}_{k \text{-mal}}\\
+            &= SB\underbrace{(S^{-1} S)}_{E} B \underbrace{(S^{-1} S)}_{E} \dots \underbrace{(S^{-1} S)}_{E} B S^{-1}
+                &&= V \underbrace{L \cdots L}_{k \text{-mal}} S^{-1}\\
+            &= S B^k S^{-1}
+    \end{alignat*}
+    Damit folgt dann für die Matrixexponentialfunktion
+    \begin{alignat*}{2}
+        \e^{t A} &= \e^{t \cdot S B S^{-1}} &&= \sum^\infty_{k=0} \frac{(t \cdot S B S^{-1})^k}{k!}\\
+                 &= \sum^\infty_{k=0} \frac{t^k (S B S^{-1})^k}{k!} &&= \sum^\infty_{k=0} \frac{t^k \cdot S B^k S^{-1}}{k!}\\
+                 &= V \left( \sum^\infty_{k=0} \frac{t^k B^k}{k!} \right) S^{-1} &&= V \left( \sum^\infty_{k=0} \frac{(t B)^k}{k!} \right) S^{-1}\\
+                 &= V e^{t B} S^{-1}
+    \end{alignat*}
+\end{proof}
+
+\begin{corollary}
+    Sei $A$ diagonalisierbar mit $A = S D S^{-1}$.
+    Dann gilt für die Matrixexponentialfunktion
+    \begin{equation*}
+        \e^{t A} = S \e^{t D} S^{-1}.
+    \end{equation*}
+\end{corollary}
+
+\begin{proof}
+    $A$ ist nach Definition genau dann diagonalisierbar, wenn $A$ zu einer Diagonalmatrix $D$ ähnlich ist.
+    Also~\hyperref[thm:matrixexponential-diagonalisierbar]{Lemma~\ref*{thm:matrixexponential-diagonalisierbar}}.
+\end{proof}
+
+\subsection{Nicht-diagonalisierbare Matrizen}\label{subsec:nichtdiagonalisierbare-matrizen}
+Jede Matrix $A$ lässt sich auf eine \emph{J\textc{ordan}-Normalform} $J = V^{-1} L V$ bringen.
+Eine J\textc{ordan}-Normalform $J$ ist eine Blockdiagonalmatrix der Form
+\begin{gather*}
+    J = \begin{pmatrix}
+            J_1 &        &  \\
+                & \ddots & \\
+                &        & J_n
+    \end{pmatrix}\\
+    \intertext{mit J\textc{ordan}-Block}
+    J_i = \begin{pmatrix}
+              \lambda_i & 1         &        & \\
+                        & \lambda_i & \ddots & \\
+                        &           & \ddots & 1 \\
+                        &           &        & \lambda_i
+    \end{pmatrix}
+    \qquad (i = 1,\dots,n).
+\end{gather*}
+Das folgende \hyperref[thm:blockdiag-exp]{Lemma~\ref*{thm:blockdiag-exp}} lässt vermuten,
+dass die gewonnenen Erkenntnisse aus~\autoref{subsec:diagonalisierbare-matrizen} zur Berechnung der
+Matrixexponentialfunktion $\e^{J} = \e^{V J_i V^{-1}}$ anwendbar sein könnten.
+
+\begin{lemma}\label{thm:blockdiag-exp}
+    Sei $A \in \RR^{n \times n}$ eine Blockdiagonalmatrix
+    \begin{equation*}
+        A = \diag\left\{A_1,\dots,A_m\right\}
+        = \begin{pmatrix}
+                A_1 &        & \\
+                    & \ddots & \\
+                    &        & A_m
+        \end{pmatrix},
+    \end{equation*}
+    mit quadratischen Matrizen $A_1, \dots, A_m$.
+    Dann gilt
+    \begin{equation*}
+        \e^{t A} = \diag\left\{ \e^{t A_1}, \dots,\e^{t A_m} \right\}.
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    Beweis analog~\hyperref[thm:matrixexponential-diagonal]{Satz~\ref*{thm:matrixexponential-diagonal}}
+\end{proof}
+
+Zudem zeigt~\hyperref[thm:blockdiag-exp]{Lemma~\ref*{thm:blockdiag-exp}},
+dass sich die Berechnung von $\e^J$ auf die einzelnen $\e^{J_i}$ für $i = 1,\dots,n$ reduzieren lässt.\\
+Ein J\textc{ordan}-Block $J_i$ lässt sich weiter zerlegen zu
+\begin{equation*}
+    J_i = \begin{pmatrix}
+              \lambda_i & 1         &        & \\
+                        & \lambda_i & \ddots & \\
+                        &           & \ddots & 1 \\
+                        &           &        & \lambda_i
+    \end{pmatrix}
+    = \underbrace{\begin{pmatrix}
+        \lambda_i &        & \\
+                  & \ddots & \\
+                  &        & \lambda_i
+    \end{pmatrix}}_{= L_i}
+    + \underbrace{\begin{pmatrix}
+          0 & 1 &        & \\
+            & 0 & \ddots & \\
+            &   & \ddots & 1 \\
+            &   &        & 0
+    \end{pmatrix}}_{\eqqcolon N}
+    = L_i + N.
+\end{equation*}
+
+\begin{definition}[Wiederholung]
+    Eine Matrix $N$ heißt \emph{nilpotent}, falls ein $l \in \NN$ so existiert, dass $N^l = 0$.
+\end{definition}
+
+\begin{corollary}
+    Die Matrix $N \in \NN^{l \times l}$ aus der Zerlegung $J_i = L_i + N$ ist eine nilpotente Matrix mit $N^l = 0$.
+\end{corollary}
+
+Betrachtet man den Vorgang des Potenzierens von $N$ ausführlicher, erkennt man,
+dass die Nebendiagonale auf denen die $1$en stehen sich \enquote{nach oben-rechts hinaus schiebt}:
+\begin{equation*}
+    N = \begin{pmatrix}
+             0 & 1      &        & \\
+               & \ddots & \ddots & \\
+               &        & \ddots & 1\\
+               &        &        & 0
+         \end{pmatrix},
+    N^2 = \begin{pmatrix}
+               0 & 0      & 1      &        & \\
+                 & \ddots & \ddots & \ddots & \\
+                 &        & \ddots & \ddots & 1\\
+                 &        &        & \ddots & 0\\
+                 &        &        &        & 0
+           \end{pmatrix},
+    \dots,
+    N^{l-1} = \begin{pmatrix}
+                   0 &        & 1\\
+                     & \ddots & \\
+                     &        & 0
+              \end{pmatrix},
+    N^l = \mathfrak{0}
+\end{equation*}
+
+\begin{lemma}
+    Die Matrizen $L_i$ und $N$ aus der Zerlegung $J_i = L_i + N$ kommutieren bzgl.\ dem Matrixprodukt.
+\end{lemma}
+
+\begin{proof}
+    \begin{equation*}
+        L_i N = (\lambda_i E) N = \lambda_i (EN) = \lambda_i (NE) = N (\lambda_i E) = N L_i,
+    \end{equation*}
+\end{proof}
+
+Damit gilt
+\begin{equation*}
+    \e^{t (L_i + N)} = \e^{t L_i + t N} = \e^{t L_i} \e^{t N}.
+\end{equation*}
+
+Da $L_i$ eine Diagonalmatrix ist, ist die Lösung von $\e^{t L}$ bereits aus~\autoref{subsec:diagonale-matrizen} bekannt.
+Für $N$ als nilpotente Matrix ergibt sich zudem eine endliche Summe bei der Berechnung von $\e^{t N}$,
+da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
+\begin{align*}
+    \e^ {tN } &= \sum^\infty_{k=0} \frac{(t N)^k}{k!}
+        = \sum^{l-1}_{k=0} \frac{(t N)^k}{k!}
+        = E + t N + \frac{t^2}{2} N^2 + \dots + \frac{t^{l-1}}{(l-1)!} N^{l-1}\\
+    &= E + t N +  \frac{t^2}{2} \begin{pmatrix}
+                                0 & 0      & 1      &        & \\
+                                  & \ddots & \ddots & \ddots & \\
+                                  &        & \ddots & \ddots & 1\\
+                                  &        &        & \ddots & 0\\
+                                  &        &        &        & 0
+                            \end{pmatrix}
+        + \dots + \frac{t^{l-1}}{(l-1)!}  \begin{pmatrix}
+                                        0 &        & 1\\
+                                          & \ddots & \\
+                                          &        & 0
+                                    \end{pmatrix}\\
+    &= \begin{pmatrix}
+           1 & t & \frac{t^2}{2} & \frac{t^3}{3!} & \dots  & \frac{t^{l-1}}{(l-1)!}\\
+           & 1 & t               & \frac{t^2}{2}  & \dots  & \frac{t^{l-2}}{(l-2)!}\\
+           &   & 1               & t              & \ddots  & \vdots\\
+           &   &                 & 1              & \ddots & \frac{t^2}{2}\\
+           &   &                 &                & \ddots & t\\
+           &   &                 &                &        & 1
+    \end{pmatrix}.
+\end{align*}
+
+\begin{remark*}
+    Für die Lösung eines~\hyperref[eq:cp]{C\textc{auchy}-Problems} mit einer nicht-diagonalisierbaren Matrix $A = V J V^{-1}$
+    mit J\textc{ordan}-Normalform $J$, gilt also insgesamt
+    \begin{align*}
+        \vec{y}(t) &= \e^{(t - t_0) A} \vec{y}_0 = \e^{(t - t_0) V L V^{-1}} \vec{y}_0 = V \e^{(t - t_0) J} V^{-1} \vec{y}_0\\
+        &= V \begin{pmatrix}
+                \e^{(t - t_0) J_1} &        & \\
+                                   & \ddots & \\
+                                   &        & \e^{(t - t_0) J_n}
+            \end{pmatrix} V^{-1} \vec{y}_0\\
+        &= V \begin{pmatrix}
+                \e^{(t - t_0) L_1} \e^{(t - t_0) N} &        & \\
+                                                    & \ddots & \\
+                                                    &        & \e^{(t - t_0) L_n} \e^{(t - t_0) N}
+            \end{pmatrix} V^{-1} \vec{y}_0.
+    \end{align*}
+\end{remark*}
+
+\begin{example*}
+    Gegeben sei das~\ref{eq:cp}
+    \begin{equation*}
+        \vec{y}'(t) = \underbrace{\begin{pmatrix} a & 1\\ 0 & a \end{pmatrix}}_{= A} y(t),\ a \in \RR,
+        \qquad \vec{y}(t_0 = 0) = \vec{y}_0 = \begin{pmatrix}y_1\\ y_2\end{pmatrix}.
+    \end{equation*}
+    $A$ lässt sich zerlegen in eine Diagonalmatrix $D$ und nilpotente Matrix $N$:
+    \begin{equation*}
+        A = \underbrace{\begin{pmatrix} a & 0\\ 0 & a \end{pmatrix}}_{\eqqcolon D}
+            + \underbrace{\begin{pmatrix} 0 & 1\\ 0 & 0 \end{pmatrix}}_{\eqqcolon N}
+    \end{equation*}
+    Nach~\hyperref[thm:existenz-eindeutigkeit]{Satz~\ref*{thm:existenz-eindeutigkeit}} und~\autoref{sec:berechnung-matrixexponential} ist die Lösung gegeben durch
+    \begin{alignat*}{2}
+        \vec{y}(t) &= \e^{t A} \vec{y}_0
+            &&= \e^{t (D + N)} \vec{y}_0\\
+        &= \e^{t D + t N} \vec{y}_0
+            &&= \e^{t D} \e^{t N} \vec{y}_0\\
+        &= \begin{pmatrix} \e^{t a} & 0\\ 0 & \e^{t a} \end{pmatrix} \begin{pmatrix} 1 & t\\ 0 & 1 \end{pmatrix} \vec{y}_0
+            &&= \begin{pmatrix} \e^{t a} & t \e^{t a}\\ 0 & \e^{t a} \end{pmatrix} \begin{pmatrix}y_1\\ y_2\end{pmatrix}\\
+        &= \begin{pmatrix} y_1 \e^{t a} + y_2 t \e^{t a}\\ y_2 \e^{t a} \end{pmatrix}
+            &&= \begin{pmatrix} \e^{t a} (y_1 + y_2 t)\\ y_2 \e^{t a} \end{pmatrix}
+    \end{alignat*}
+\end{example*}

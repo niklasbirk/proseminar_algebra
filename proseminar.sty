@@ -57,6 +57,8 @@
 
 \DeclareTextFontCommand{\emph}{\boldmath\bfseries}
 
+\allowdisplaybreaks
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   new commands and math operatos  %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -107,7 +109,8 @@
 % style for examples: "Beispiel:"
 \newtheoremstyle{nobreak*}{}{}{\normalfont}{}{\bfseries}{}{ }{}
 \theoremstyle{nobreak*}
+\newtheorem*{remark*}{Bemerkung:}
 \newtheorem*{example*}{Beispiel:}
 
 % proofs with bold name and qed at end
-\renewenvironment{proof}[1][\proofname]{\textbf{#1.} }{\nobreak\hfill\ensuremath{\blacksquare}}
+\renewenvironment{proof}[1][\proofname]{\textbf{#1.} }{\nobreak\hfill\ensuremath{\blacksquare}\par}
