@@ -112,7 +112,7 @@ dargestellt.
 \end{equation*}
 
 \subsection{Nicht-diagonalisierbare Matrizen}\label{subsec:03-03}
-Jede Matrix $A$ lässt sich auf eine \emph{J\textc{ordan}-Normalform} $J = V^{-1} A V$ bringen.
+Jede Matrix $A$ lässt sich auf eine \emph{J\textc{ordan}-Normalform} $J = V^{-1} L V$ bringen.
 Eine J\textc{ordan}-Normalform $J$ ist eine Blockdiagonalmatrix der Form
 \begin{gather*}
     J = \begin{pmatrix}
@@ -122,10 +122,10 @@ Eine J\textc{ordan}-Normalform $J$ ist eine Blockdiagonalmatrix der Form
     \end{pmatrix}\\
     \intertext{mit J\textc{ordan}-Block}
     J_i = \begin{pmatrix}
-              \lambda & 1       &        & \\
-                      & \lambda & \ddots & \\
-                      &         & \ddots & 1 \\
-                      &         &        & \lambda
+              \lambda_i & 1         &        & \\
+                        & \lambda_i & \ddots & \\
+                        &           & \ddots & 1 \\
+                        &           &        & \lambda_i
     \end{pmatrix}
     \qquad (i = 1,\dots,n).
 \end{gather*}
@@ -199,33 +199,33 @@ dass sich die Berechnung von $\e^J$ auf die einzelnen $\e^{J_i}$ für $i = 1,\do
 Ein J\textc{ordan}-Block $J_i$ lässt sich weiter zerlegen zu
 \begin{equation*}
     J_i = \begin{pmatrix}
-              \lambda & 1       &        & \\
-                      & \lambda & \ddots & \\
-                      &         & \ddots & 1 \\
-                      &         &        & \lambda
+              \lambda_i & 1         &        & \\
+                        & \lambda_i & \ddots & \\
+                        &           & \ddots & 1 \\
+                        &           &        & \lambda_i
     \end{pmatrix}
     = \underbrace{\begin{pmatrix}
         \lambda &        & \\
                 & \ddots & \\
                 &        & \lambda
-    \end{pmatrix}}_{= L}
+    \end{pmatrix}}_{= L_i}
     + \underbrace{\begin{pmatrix}
           0 & 1 &        & \\
             & 0 & \ddots & \\
             &   & \ddots & 1 \\
             &   &        & 0
     \end{pmatrix}}_{\eqqcolon N}
-    = L + N.
+    = L_i + N.
 \end{equation*}
 Dabei ist $N$ eine \emph{nilpotente} Matrix, d.h.\ es existiert ein $l \in \NN$ so, dass $N^l = 0$.
-Zudem kommutieren die Matrizen $L$ und $N$, da
+Zudem kommutieren die Matrizen $L_i$ und $N$, da
 \begin{gather*}
-    L N = (\lambda E) N = \lambda (EN) = \lambda (NE) = N (\lambda E) = N L,\\
+    L_i N = (\lambda_i E) N = \lambda (EN) = \lambda (NE) = N (\lambda_i E) = N L_i,\\
     \intertext{weshalb}
-    \e^{L + N} = \e^L \e^N
+    \e^{L_i + N} = \e^{L_i} \e^N
 \end{gather*}
 gilt.
-Da $L$ eine Diagonalmatrix ist, ist die Lösung von $\e^L$ bereits aus~\autoref{subsec:03-01} bekannt.
+Da $L_i$ eine Diagonalmatrix ist, ist die Lösung von $\e^L$ bereits aus~\autoref{subsec:03-01} bekannt.
 Für $N$ als nilpotente Matrix ergibt sich zudem eine endliche Summe bei der Berechnung von $\e^N$,
 da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
 \begin{align*}
@@ -255,11 +255,11 @@ da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
 \end{align*}
 Werden nun alle Erkenntnisse kombiniert, gilt für $\e^{J_i t}$ schließlich
 \begin{align*}
-    \e^{J_i t} &= \e^{(L + N) t} = \e^{Lt + Nt} = \e^{Lt} \e^{Nt}\\
+    \e^{J_i t} &= \e^{(L_i + N) t} = \e^{L_i t + Nt} = \e^{L_i t} \e^{Nt}\\
     &= \begin{pmatrix}
-           \e^{\lambda t} &        & \\
-                          & \ddots & \\
-                          &        & \e^{\lambda t}
+           \e^{\lambda_i t} &        & \\
+                            & \ddots & \\
+                            &        & \e^{\lambda_i t}
         \end{pmatrix}
         \begin{pmatrix}
             1 & t & \frac{t^2}{2} & \frac{t^3}{3!} & \dots  & \frac{t^{l-1}}{(l-1)!}\\
