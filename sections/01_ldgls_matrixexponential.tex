@@ -26,6 +26,26 @@
     an einer Stelle $t_0 \in \RR$ nennt man ein \emph{C\textc{auchy}-Problem} oder \emph{Anfangswertproblem}.
 \end{definition}
 
+\begin{lemma}\label{thm:matrixexp-derivative}
+    Sei $\vec{y}: \RR \to \RR^{n}$ eine vektorwertige Funktion und $A$ eine konstante Matrix.
+    Dann gilt
+    \begin{equation*}
+        \dfdx{}{t} \left( \e^{t A} \vec{y}(t) \right) = \e^{t A} \dfdx{\vec{y}(t)}{t} + A \e^{t A} \vec{y}(t).
+    \end{equation*}
+\end{lemma}
+
+\begin{proof}
+    % TODO: komponentenweise
+\end{proof}
+
+\begin{corollary}\label{thm:matrixexp-derivative-corollary}
+    Sei $\vec{y}_0 \in \RR^n$ konstant.
+    Dann gilt
+    \begin{equation*}
+        \dfdx{}{t} \left( \e^{t A} \vec{y}_0 \right) = A \e^{t A} \vec{y}_0.
+    \end{equation*}
+\end{corollary}
+
 \begin{theorem}[Existenz und Eindeutigkeit]\label{thm:existenz-eindeutigkeit}
     Vorgelegt sei ein C\textc{auchy}-Problem
     \begin{equation}\tag{CP}\label{eq:cp}
@@ -44,7 +64,9 @@
                 \begin{equation*}
                     A \vec{y}(t) = A e^{(t - t_0) A} \vec{y}_0.
                 \end{equation*}
-                Zusammen mit~\eqref{*} folgt direkt, dass~\eqref{eq:solution} das C\textc{auchy}-Problem löst.
+                Zusammen mit~\hyperref[thm:matrixexp-derivative]{Lemma~\ref*{thm:matrixexp-derivative}}
+                bzw.~\hyperref[thm:matrixexp-derivative-corollary]{Folgerung~\ref*{thm:matrixexp-derivative-corollary}}
+                folgt direkt, dass~\eqref{eq:solution} das C\textc{auchy}-Problem löst.
 
         \item   \underline{Eindeutigkeit:}\\
                 Angenommen $\vec{u}(t)$ sei eine weitere Lösung, d.h.~es gilt $\vec{u}' = A \vec{u},\ \vec{u}(t_0) = \vec{y}_0$.
