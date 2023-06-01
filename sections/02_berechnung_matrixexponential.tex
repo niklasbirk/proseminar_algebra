@@ -95,7 +95,7 @@ kann auf den obigen Fall der~\hyperref[subsec:diagonale-matrizen]{diagonalen Mat
         \e^{t A} &= \e^{t \cdot S B S^{-1}} &&= \sum^\infty_{k=0} \frac{(t \cdot S B S^{-1})^k}{k!}\\
                  &= \sum^\infty_{k=0} \frac{t^k (S B S^{-1})^k}{k!} &&= \sum^\infty_{k=0} \frac{t^k \cdot S B^k S^{-1}}{k!}\\
                  &= V \left( \sum^\infty_{k=0} \frac{t^k B^k}{k!} \right) S^{-1} &&= V \left( \sum^\infty_{k=0} \frac{(t B)^k}{k!} \right) S^{-1}\\
-                 &= V e^{t B} S^{-1}
+                 &= V \e^{t B} S^{-1}
     \end{alignat*}
 \end{proof}
 
@@ -113,7 +113,7 @@ kann auf den obigen Fall der~\hyperref[subsec:diagonale-matrizen]{diagonalen Mat
 \end{proof}
 
 \subsection{Nicht-diagonalisierbare Matrizen}\label{subsec:nichtdiagonalisierbare-matrizen}
-Jede Matrix $A$ lässt sich auf eine \emph{J\textc{ordan}-Normalform} $J = V^{-1} L V$ bringen.
+Jede quadratische Matrix $A$ lässt sich auf eine \emph{J\textc{ordan}-Normalform} $J = V^{-1} A V$ bringen.
 Eine J\textc{ordan}-Normalform $J$ ist eine Blockdiagonalmatrix der Form
 \begin{gather*}
     J = \begin{pmatrix}
@@ -132,7 +132,7 @@ Eine J\textc{ordan}-Normalform $J$ ist eine Blockdiagonalmatrix der Form
 \end{gather*}
 Das folgende \hyperref[thm:blockdiag-exp]{Lemma~\ref*{thm:blockdiag-exp}} lässt vermuten,
 dass die gewonnenen Erkenntnisse aus~\autoref{subsec:diagonalisierbare-matrizen} zur Berechnung der
-Matrixexponentialfunktion $\e^{J} = \e^{V J_i V^{-1}}$ anwendbar sein könnten.
+Matrixexponentialfunktion $\e^{A} = \e^{V J V^{-1}}$ anwendbar sein könnten.
 
 \begin{lemma}\label{thm:blockdiag-exp}
     Sei $A \in \RR^{n \times n}$ eine Blockdiagonalmatrix
@@ -156,8 +156,9 @@ Matrixexponentialfunktion $\e^{J} = \e^{V J_i V^{-1}}$ anwendbar sein könnten.
 \end{proof}
 
 Zudem zeigt~\hyperref[thm:blockdiag-exp]{Lemma~\ref*{thm:blockdiag-exp}},
-dass sich die Berechnung von $\e^J$ auf die einzelnen $\e^{J_i}$ für $i = 1,\dots,n$ reduzieren lässt.\\
-Ein J\textc{ordan}-Block $J_i$ lässt sich weiter zerlegen zu
+dass sich die Berechnung von $\e^J$ auf die einzelnen $\e^{J_i}$ für $i = 1,\dots,n$ reduzieren lässt.
+Dafür werden im Folgenden die J\textc{ordan}-Blöcke $J_i$ betrachtet,
+denn ein J\textc{ordan}-Block $J_i$ lässt sich weiter zerlegen in
 \begin{equation*}
     J_i = \begin{pmatrix}
               \lambda_i & 1         &        & \\
@@ -209,11 +210,11 @@ dass die Nebendiagonalen auf denen die $1$en stehen \enquote{nach oben-rechts hi
                      & \ddots & \\
                      &        & 0
               \end{pmatrix},
-    N^l = \mathfrak{0}
+    N^l = \vec{0}_l
 \end{equation*}
 
 \begin{lemma}
-    Die Matrizen $L_i$ und $N$ aus der Zerlegung $J_i = L_i + N$ kommutieren bzgl.\ dem Matrixprodukt.
+    Die Matrizen $L_i$ und $N$ aus der Zerlegung $J_i = L_i + N$ kommutieren bzgl.\ der Matrixmultiplikation.
 \end{lemma}
 
 \begin{proof}
@@ -227,7 +228,7 @@ Damit gilt
     \e^{t (L_i + N)} = \e^{t L_i + t N} = \e^{t L_i} \e^{t N}.
 \end{equation*}
 
-Da $L_i$ eine Diagonalmatrix ist, ist die Lösung von $\e^{t L}$ bereits aus~\autoref{subsec:diagonale-matrizen} bekannt.
+Da $L_i$ eine Diagonalmatrix ist, ist die Lösung von $\e^{t L_i}$ bereits aus~\autoref{subsec:diagonale-matrizen} bekannt.
 Für $N$ als nilpotente Matrix ergibt sich zudem eine endliche Summe bei der Berechnung von $\e^{t N}$,
 da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
 \begin{align*}
@@ -260,25 +261,25 @@ da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
     Für die Lösung eines~\hyperref[eq:cp]{C\textc{auchy}-Problems} mit einer nicht-diagonalisierbaren Matrix $A = V J V^{-1}$
     mit J\textc{ordan}-Normalform $J$, gilt also insgesamt
     \begin{align*}
-        \vec{y}(t) &= \e^{(t - t_0) A} \vec{y}_0 = \e^{(t - t_0) V L V^{-1}} \vec{y}_0 = V \e^{(t - t_0) J} V^{-1} \vec{y}_0\\
+        \vec{u}(t) &= \e^{(t - t_0) A} \vec{u}_0 = \e^{(t - t_0) V L V^{-1}} \vec{u}_0 = V \e^{(t - t_0) J} V^{-1} \vec{u}_0\\
         &= V \begin{pmatrix}
                 \e^{(t - t_0) J_1} &        & \\
                                    & \ddots & \\
                                    &        & \e^{(t - t_0) J_n}
-            \end{pmatrix} V^{-1} \vec{y}_0\\
+            \end{pmatrix} V^{-1} \vec{u}_0\\
         &= V \begin{pmatrix}
                 \e^{(t - t_0) L_1} \e^{(t - t_0) N} &        & \\
                                                     & \ddots & \\
                                                     &        & \e^{(t - t_0) L_n} \e^{(t - t_0) N}
-            \end{pmatrix} V^{-1} \vec{y}_0.
+            \end{pmatrix} V^{-1} \vec{u}_0.
     \end{align*}
 \end{remark*}
 
 \begin{example*}
     Gegeben sei das~\ref{eq:cp}
     \begin{equation*}
-        \vec{y}'(t) = \underbrace{\begin{pmatrix} a & 1\\ 0 & a \end{pmatrix}}_{= A} y(t),\ a \in \RR,
-        \qquad \vec{y}(t_0 = 0) = \vec{y}_0 = \begin{pmatrix}y_1\\ y_2\end{pmatrix}.
+        \vec{u}'(t) = \underbrace{\begin{pmatrix} a & 1\\ 0 & a \end{pmatrix}}_{= A} y(t),\ a \in \RR,
+        \qquad \vec{u}(t_0 = 0) = \vec{u}_0 = \begin{pmatrix}y_1\\ y_2\end{pmatrix}.
     \end{equation*}
     $A$ lässt sich zerlegen in eine Diagonalmatrix $D$ und nilpotente Matrix $N$:
     \begin{equation*}
@@ -287,11 +288,11 @@ da ab einem $l \in \NN$ gilt, dass $N^l = N^{l+1} = \dots = 0$, d.h.
     \end{equation*}
     Nach~\hyperref[thm:existenz-eindeutigkeit]{Satz~\ref*{thm:existenz-eindeutigkeit}} und~\autoref{sec:berechnung-matrixexponential} ist die Lösung gegeben durch
     \begin{alignat*}{2}
-        \vec{y}(t) &= \e^{t A} \vec{y}_0
-            &&= \e^{t (D + N)} \vec{y}_0\\
-        &= \e^{t D + t N} \vec{y}_0
-            &&= \e^{t D} \e^{t N} \vec{y}_0\\
-        &= \begin{pmatrix} \e^{t a} & 0\\ 0 & \e^{t a} \end{pmatrix} \begin{pmatrix} 1 & t\\ 0 & 1 \end{pmatrix} \vec{y}_0
+        \vec{u}(t) &= \e^{t A} \vec{u}_0
+            &&= \e^{t (D + N)} \vec{u}_0\\
+        &= \e^{t D + t N} \vec{u}_0
+            &&= \e^{t D} \e^{t N} \vec{u}_0\\
+        &= \begin{pmatrix} \e^{t a} & 0\\ 0 & \e^{t a} \end{pmatrix} \begin{pmatrix} 1 & t\\ 0 & 1 \end{pmatrix} \vec{u}_0
             &&= \begin{pmatrix} \e^{t a} & t \e^{t a}\\ 0 & \e^{t a} \end{pmatrix} \begin{pmatrix}y_1\\ y_2\end{pmatrix}\\
         &= \begin{pmatrix} y_1 \e^{t a} + y_2 t \e^{t a}\\ y_2 \e^{t a} \end{pmatrix}
             &&= \begin{pmatrix} \e^{t a} (y_1 + y_2 t)\\ y_2 \e^{t a} \end{pmatrix}
