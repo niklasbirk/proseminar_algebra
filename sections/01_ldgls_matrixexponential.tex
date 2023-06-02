@@ -106,7 +106,7 @@
                     \dfdx{}{t} \left( \e^{-(t - t_0) A} \vec{v}(t) \right)
                     \overset{\ref{thm:matrixexp-derivative}}&{=} \e^{-(t - t_0) A} \dfdx{\vec{v}(t)}{t} - A \e^{-(t - t_0) A} \vec{v}(t)\\
                     &= \e^{-(t - t_0) A} A \vec{v}(t) - \e^{-(t - t_0) A} A \vec{v}(t)\\
-                    &= \vec{0}
+                    &= \vec{0}. % TODO: e^{-tA} kommutiert mit A, weil A mit sich selbst kommutiert; Minh? oder selsbt sagen?
                 \end{align*}
                 Da die Ableitung die Nullmatrix ist, ist $\e^{-(t - t_0) A} \vec{v}(t)$ konstant, d.h.
                 \begin{equation*}
@@ -116,7 +116,14 @@
                 \begin{equation*}
                    \vec{v}(t) =  \e^{(t - t_0) A} \vec{c}
                 \end{equation*}
-                folgt.\\\\
-                tbc.
+                folgt.
+                Mit Voraussetzung $\vec{v}(t_0) = \vec{u}_0$ gilt dann für die Konstante $\vec{c}$
+                \begin{equation*}
+                    \vec{v}(t_0) =  \e^{(t_0 - t_0) A} \vec{c} = E \vec{c} = \vec{c} = \vec{u}_0.
+                \end{equation*}
+                Insgesamt ergibt sich also
+                \begin{equation*}
+                    \vec{v}(t) =  \e^{(t - t_0) A} \vec{u}_0 = \vec{u}(t)
+                \end{equation*}
     \end{itemize}
 \end{proof}
