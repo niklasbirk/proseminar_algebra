@@ -87,15 +87,15 @@ kann auf den obigen Fall der~\hyperref[subsec:diagonale-matrizen]{diagonalen Mat
     \begin{alignat*}{2}
         A^k &= (S B S^{-1})^k &&= \underbrace{(S B S^{-1}) (S B S^{-1}) (S B S^{-1}) \dots (S B S^{-1})}_{k \text{-mal}}\\
             &= SB\underbrace{(S^{-1} S)}_{E} B \underbrace{(S^{-1} S)}_{E} \dots \underbrace{(S^{-1} S)}_{E} B S^{-1}
-                &&= V \underbrace{L \cdots L}_{k \text{-mal}} S^{-1}\\
+                &&= S \underbrace{L \cdots L}_{k \text{-mal}} S^{-1}\\
             &= S B^k S^{-1}
     \end{alignat*}
     Damit folgt dann für die Matrixexponentialfunktion
     \begin{alignat*}{2}
         \e^{t A} &= \e^{t \cdot S B S^{-1}} &&= \sum^\infty_{k=0} \frac{(t \cdot S B S^{-1})^k}{k!}\\
                  &= \sum^\infty_{k=0} \frac{t^k (S B S^{-1})^k}{k!} &&= \sum^\infty_{k=0} \frac{t^k \cdot S B^k S^{-1}}{k!}\\
-                 &= V \left( \sum^\infty_{k=0} \frac{t^k B^k}{k!} \right) S^{-1} &&= V \left( \sum^\infty_{k=0} \frac{(t B)^k}{k!} \right) S^{-1}\\
-                 &= V \e^{t B} S^{-1}
+                 &= S \left( \sum^\infty_{k=0} \frac{t^k B^k}{k!} \right) S^{-1} &&= S \left( \sum^\infty_{k=0} \frac{(t B)^k}{k!} \right) S^{-1}\\
+                 &= S \e^{t B} S^{-1}
     \end{alignat*}
 \end{proof}
 
