@@ -38,20 +38,16 @@
     Das Ergebnis von $\e^{t A} \in \RR^{n \times n}$ ist eine Matrix.
     Demnach ist $\e^{t A} \vec{u}(t) \in \RR^{n \times 1}$ ein Matrix-Vektor-Produkt, deren Komponenten sich durch
     \begin{equation*}
-        (\e^{t A} \vec{u}(t))_i = \sum^n_{j=1} \e^{t A}_{ij} \cdot u_j(t)
+        (\e^{t A} \vec{u}(t))_i = \sum^n_{j=1} \left( \e^{t A} \right)_{ij} \cdot u_j(t)
     \end{equation*}
     ergeben.
     Differenzieren der Komponenten, zusammen mit Linearität des Differentialoperators und der üblichen Produktregel, liefert
     \begin{align*}
         \dfdx{}{t}(\e^{t A} \vec{u}(t))_i
-        &= \dfdx{}{t} \left( \sum^n_{j=1} \e^{t A}_{ij} \cdot u_j(t) \right)\\
-        &= \dfdx{}{t} \left( \e^{t A}_{i1} \cdot u_j(t) + \dots + \e^{t A}_{in} \cdot u_j(t) \right)\\
-        &=  \dfdx{}{t} \left( \e^{t A}_{i1} \cdot u_j(t) \right) + \dots + \dfdx{}{t} \left( \e^{t A}_{in} \cdot u_j(t) \right)\\
-        &=  \left( \e^{t A}_{i1} \cdot \dfdx{u_j(t)}{t} + \dfdx{\e^{t A}_{i1}}{t} \cdot u_j(t) \right)
-            + \dots + \left( \e^{t A}_{in} \cdot \dfdx{u_j(t)}{t} + \dfdx{\e^{t A}_{in}}{t} \cdot u_j(t) \right)\\
-        &= \sum^n_{j=1} \left( \e^{t A}_{ij} \cdot \dfdx{u_j(t)}{t} + \dfdx{\e^{t A}_{ij}}{t} \cdot u_j(t) \right)\\
-        &= \sum^n_{j=1} \left( \e^{t A}_{ij} \cdot \dfdx{u_j(t)}{t} \right)
-            +  \sum^n_{j=1} \left( \dfdx{\e^{t A}_{ij}}{t} \cdot u_j(t) \right).
+        &= \dfdx{}{t} \left( \sum^n_{j=1} \left( \e^{t A} \right)_{ij} \cdot u_j(t) \right)
+            = \sum^n_{j=1} \left( \left( \e^{t A} \right)_{ij} \cdot \dfdx{u_j(t)}{t} + \dfdx{\left( \e^{t A} \right)_{ij}}{t} \cdot u_j(t) \right)\\
+        &= \sum^n_{j=1} \left( \left( \e^{t A} \right)_{ij} \cdot \dfdx{u_j(t)}{t} \right)
+            +  \sum^n_{j=1} \left( \dfdx{\left( \e^{t A} \right)_{ij}}{t} \cdot u_j(t) \right).
     \end{align*}
     Das ist ganzheitlich betrachtet gerade
     \begin{equation*}
